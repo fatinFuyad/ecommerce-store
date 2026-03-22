@@ -49,16 +49,16 @@ app.use("/api/analytics", analyticsRouter);
 // console.log({ __dirname: path.dirname(fileURLToPath(import.meta.url)) });
 /////
 
-// if (process.env.NODE_ENV === "production") {
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-//   app.use(express.static(path.join(__dirname, "frontend/dist")));
+if (process.env.NODE_ENV === "production") {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  app.use(express.static(path.join(__dirname, "frontend/dist")));
 
-//   // any other routes will be handled by the fronted <BrowserRouter>
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-//   });
-// }
+  // any other routes will be handled by the fronted <BrowserRouter>
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
+}
 
 app.use((error, req, res, next) => {
   console.log(`⚠️ Error ${error.message}`);
